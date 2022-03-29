@@ -1,6 +1,7 @@
 App = {
   web3Provider: null,
   contracts: {},
+  account: '0x0',
 
   init: async function() {
     // Load Anything for the website
@@ -13,7 +14,8 @@ App = {
       App.web3Provider = window.ethereum;
       try {
         // Request account access
-        await ethereum.request({ method: 'eth_requestAccounts' });
+        const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+        App.account = account[0]
       } catch (error) {
         // User denied account access...
         console.error("User denied account access")
@@ -28,6 +30,13 @@ App = {
       App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
     }
     web3 = new Web3(App.web3Provider);
+
+    web3.eth.getCoinbase(function(err, account) {
+      if (err === null) {
+        App.account = account;
+        console.log(account)
+      }
+    });
 
     return App.initContract();
   },
@@ -61,40 +70,12 @@ App = {
       var tkto = $("tk-to").value
       var tkser = $("tk-ser").value
 
-      instance.mint(tkto, tkser, tkname)
-      console("mint token")
+      console.log("test2")
+      return instance.mint(tkto, tkser, tkname, { from: App.account })
     }).catch(function(err) {
       console.log(err.message);
     });
   },
-
-  handleAdopt: function(event) {
-    event.preventDefault();
-
-    var petId = parseInt($(event.target).data('id'));
-
-    var adoptionInstance;
-
-    web3.eth.getAccounts(function(error, accounts) {
-      if (error) {
-        console.log(error);
-      }
-
-      var account = accounts[0];
-
-      App.contracts.Adoption.deployed().then(function(instance) {
-        adoptionInstance = instance;
-
-        // Execute adopt as a transaction by sending account
-        return adoptionInstance.adopt(petId, {from: account});
-      }).then(function(result) {
-        return App.markAdopted();
-      }).catch(function(err) {
-        console.log(err.message);
-      });
-    });
-  }
-
 };
 
 $(function() {
