@@ -15,7 +15,7 @@ App = {
       try {
         // Request account access
         const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-        App.account = account[0]
+        App.account = accounts[0]
       } catch (error) {
         // User denied account access...
         console.error("User denied account access")
@@ -66,11 +66,9 @@ App = {
 
     App.contracts.LuxChain.deployed().then(function(instance) {
       luxchainInstance = instance;
-      var tkname = $("tk-name").value
-      var tkto = $("tk-to").value
-      var tkser = $("tk-ser").value
-
-      console.log("test2")
+      var tkname = document.getElementById("tk-name").value
+      var tkto = document.getElementById("tk-to").value
+      var tkser = document.getElementById("tk-ser").value
       return instance.mint(tkto, tkser, tkname, { from: App.account })
     }).catch(function(err) {
       console.log(err.message);
