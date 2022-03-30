@@ -9,6 +9,7 @@
 
         <!-- Bootstrap -->
         <link href="css/bootstrap.min.css" rel="stylesheet" />
+        <link href="css/index.css" rel="stylesheet" />
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -17,6 +18,7 @@
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
+
     <body>
         <div class="container">
             <div class="row">
@@ -27,24 +29,52 @@
                 </div>
             </div>
 
-            <div id="loading">The web is loading</div>
-            <div id="content"></div>
-            <div>
-                <label class="tk-name">Token name</label>
-                <input id="tk-name" />
-            </div>
-            <div>
-                <label class="tk-to">Token to</label>
-                <input id="tk-to" />
-            </div>
-            <div>
-                <label class="tk-ser">Token serial number</label>
-                <input id="tk-ser" />
-            </div>
-            <button id="btn-mint">mint the token</button>
+            <!-- <div id="loading">The web is loading</div> -->
+            <div id="content">
+                <div class="box">
+                    <div>
+                        <label class="tk-name">Token name</label>
+                        <input id="tk-name" />
+                    </div>
+                    <div>
+                        <label class="tk-to">Token to</label>
+                        <input id="tk-to" />
+                    </div>
+                    <div>
+                        <label class="tk-ser">Token serial number</label>
+                        <input id="tk-ser" />
+                    </div>
+                    <button id="btn-mint">mint the token</button>
+                </div>
 
-            <div id="userinfo" class="row">
-                <p>This is user address</p>
+                <div class="box">
+                    <div id="checkowner" class="row">
+                        <input id="ownerof" />
+                        <button id="btn-owner">get the token owner</button>
+                        <p id="tk-owner">The owner address is:</p>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div id="checkser" class="row">
+                        <input id="serof" />
+                        <button id="btn-serial">
+                            get the token serial number
+                        </button>
+                        <p id="tk-serial">The token serial is:</p>
+                    </div>
+                </div>
+                <div class="box">
+                    <div>
+                        <label class="tk-to">Token transfer to</label>
+                        <input id="tk-tranto" />
+                    </div>
+                    <div>
+                        <label class="tk">Token ID</label>
+                        <input id="tk-id" />
+                    </div>
+                    <button id="btn-tran">Transfer token</button>
+                </div>
             </div>
         </div>
 
